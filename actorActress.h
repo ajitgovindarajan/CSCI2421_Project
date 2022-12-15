@@ -1,14 +1,51 @@
 //
 // Created by agovi on 11/21/2022.
 //
+// need unique writeup- in the readme of how each student contributed in each way
 
 #ifndef FINAL_PROJECT_ACTORACTRESS_H
 #define FINAL_PROJECT_ACTORACTRESS_H
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <utility>
 using namespace std;
 
+
+struct ActressActor{
+     unsigned int year;
+     string award;
+     //int winner;
+     short int winner;
+     // could also do
+     // bool winner;
+     string name;
+     string film;
+
+    explicit actorActress(vector<string> data){
+        year = stoi(data[0]);
+        award = data[1];
+        winner = stoi(data[2]);
+        name = data[3];
+        film = data[4];
+    }
+
+    actorActress
+    friend ostream operator << (ostream& out actorActress){
+        out << "Name; " << actorActress.name <<endl;
+        out << "Film: " << actorActress.film <<endl;
+        out << "Role: " << actorActress.award <<endl;
+        out << "Year: " << actorActress.year <<endl;
+        out << "Winner: " << actorActress.winner <<endl;
+
+        return out;
+    }
+    bool_operator < (const actorActress &actor) const {
+        return (this-> name < actor.name);
+    }
+};
+
+/*
 class actorActress {
 public:
     NodeActor();
@@ -42,4 +79,5 @@ public:
 
 
 };
+*/
 #endif //FINAL_PROJECT_ACTORACTRESS_H
