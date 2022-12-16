@@ -1,138 +1,126 @@
-//
-// Created by agovi on 11/21/2022.
-//
+/*************************************************
+ * Version: 12/16/2022
+ * main,cpp is the driver code for this entire project. It will house the final main menu
+ * that the user will use to decide what action will be done with the data base and which data
+ * base will be affected.
+ * **************************************************/
+
+#include "fileinputoutput.h"
+#include "Movies.h"
+#include "BST.h"
+#include "actorActress.h"
+#include "functions.h"
+#include "Exceptions.h"
+#include <cassert>
 #include <iostream>
 #include <string>
-#include <fstream>
-#include <Movies.h>
-#include "actorActress.h"
+#include <vector>
 using namespace std;
 
 int main() {
     // variables for the menu input and conditional block
     int mainMenuInput;
-    int userInputSearch;
-    int userInputAdd;
-    int userInputModify;
-    int userInputDelete;
-    int userInputExport;
+    int databaseInput;
     fstream actDataBase;
     fstream pictureBase;
     //std::string file;
+    string movie_name;
+    string actor_name;
+
+    BinarySearchTree<actorActress> actor_actress;
+    BinarySearchTree<Movies> movie;
+
+    string actor_actress_file = "../input/actor_actress.csv";
+    string pictures_file = "../input/pictures.csv";
+
+    ReadFromFile(actor_actress_file, actor_actress);
+    read_movies(pictures_file, movie);
 
     actDataBase.open(actor_actress.csv);
     pictureBase.open(pictures.csv);
 
+
 /*********************Main Menu*******************/
-    cout << "Welcome to the Academy awards DataBase: "<< endl;
-    cout << "Please choose what you would like to do:"<< endl;
-    cout << "1. Search DataBase"<< endl;
-    cout << "2. Add Record to Database"<< endl;
-    cout << "3. Modify a Record of the Database"<< endl;
-    cout << "4, Delete a record from the database"<< endl;
-    cout << "5. Export Database to .CSV file"<< endl;
-    cout << "6. Exit"<< endl;
-    cin >> mainMenuInput;
-
-    if (mainMenuInput ==1 )
-    {
-        cout << "Which DataBase would you like to Search"<<endl;
-        cout << "1. Actor-Actress Database"<< endl;
-        cout << "2. Movies Database"<< endl;
-        cin >> userInputSearch;
-
-        if (userInputSearch==1)
-        {
-            cout << "Search the Actor-Actress Database"<< endl;
-            // call search Function for Actor-Actress database
-        } else if (userInputSearch == 2) {
-            std::cout << "Search the database of movies" << std::endl;
+    cout << "Welcome to the Academy awards DataBase: " << endl;
+    cout << "Please choose what you would like to do:" << endl;
+    cout << "1. Movie database" << endl;
+    cout << "2. Actor/Actress database" << endl;
+    cin << databaseInput;
+    if (databaseInput == 1) {
+        cout << "You have chosen " << databaseInput << " which is the Movie database" << endl;
+        cout << "1. add a Record of the Database" << endl;
+        cout << "2. Search/ Modify a Record of the Database" << endl;
+        cout << "3. Search/Delete a record from the database" << endl;
+        cout << "4. Print the Sorted database" << endl;
+        cout << "5.Partial Search of the Data base" << endl;
+        cout << "6. Export Database to .CSV file" << endl;
+        cout << "7. Exit" << endl;
+        cin << mainMenuInput << endl;
+        if (mainMenuInput == 1) {
+            cout << "Add a record" << endl;
+            addMovie(movie);
+        } else if (mainMenuInput == 2) {
+            cin.ignore();
+            cout << "Enter a movie name: ";
+            getline(cin, movie_name);
+            modifyMovie(movie, movie_name);
+        } else if (mainMenuInput == 3) {
+            cout << "Delete Record of the Movies Database " << endl;
+            cout << "Enter movie name" << endl;
+            getline(cin, movie_name);
+            deleteMovie(movie, movie_name);
+        } else if (mainMenuInput == 4) {
+            cout << "Print the Sorted Data Base " << endl;
+            printMovies_sorted(movie);
+        } else if (mainMenuInput == 5) {
+            // partial search
+        } else if (mainMenuInput == 6) {
+            cout << "Exporting the Movie Data base to a new csv file" << std::endl;
+            printMovies_toFile(movie);
+        } else if (mainMenuInput == 7) {
+            cout << "Exiting the program" << endl;
         } else {
-            std::cout << "Not a valid selection, please try again" <<std::endl
+            cout << "Not valid selection" << end;
         }
-    } else if (mainMenuInput == 2) {
-        cout << "Which Database would you like to add a record to: "<< endl;
-        cout << "1. Actor-Actress Database"<< endl;
-        cout << "2. Movies Database"<< endl;
-        cin  >> userInputAdd;
-
-        if (userInputAdd==1)
-        {
-            cout << "Add record to Actor-Actress Database"<< endl;
-            // call function for ActorBST::addRecord
-
+    } else if (databaseInput == 2) {
+        cout << "You have chosen " << databaseInput << " which is the Actor/Actress database" << endl;
+        cout << "1. add a Record of the Database" << endl;
+        cout << "2. Search/ Modify a Record of the Database" << endl;
+        cout << "3. Search/Delete a record from the database" << endl;
+        cout << "4. Print the Sorted database" << endl;
+        cout << "5.Partial Search of the Data base" << endl;
+        cout << "6. Export Database to .CSV file" << endl;
+        cout << "7. Exit" << endl;
+        cin << mainMenuInput << endl;
+        if (mainMenuInput == 1) {
+            cout << "Add a record" << endl;
+            addActor(actor_actress);
+        } else if (mainMenuInput == 2) {
+            cout << "Modify Record of the Actor/Actress Database " << endl;
+            cin.ignore();
+            cout << "Enter a Actor/ Actress name: ";
+            getline(cin, actor_name);
+            modifyMovie(actor_actress, actor_name);
+        } else if (mainMenuInput == 3) {
+            cout << "Delete Record of the Actor/Actress Database " << endl;
+            cout << "Enter Actor/Actress name" << endl;
+            getline(cin, actor_name);
+            deleteMovie(actor_actress, actor_name);
+        } else if (mainMenuInput == 4) {
+            cout << "Print the Sorted Data Base " << endl;
+            printActress_sorted(actor_actress);
+        } else if (mainMenuInput == 5) {
+            // partial search - ask for the name
+            // partial search
+        } else if (mainMenuInput == 6) {
+            cout << "Exporting the Actor/Actress database to a new csv file" << std::endl;
+            printActors_toFile(actor_actress);
+        } else if (mainMenuInput == 7) {
+            cout << "Exiting the program" << endl;
+        } else {
+            cout << "Not valid selection" << end;
         }
-        else if (userInputAdd==2)
-        {
-            cout << "Add record to Movies Database"<< endl;
-            //call function for MovieBST::addRecord
-        }
-        else
-        {
-            cout << "Please Make a Valid Selection"<< endl;
-            cin >> userInputAdd;
-        }
-    } else if (mainMenuInput == 3) {
-        cout << "Which Database would you like to modify a record in:"<< endl;
-        cout << "1. Actor-Actress Database"<< endl;
-        cout << "2. Movies Database"<< endl;
-        cin >> userInputModify;
-
-        if (userInputModify==1)
-        {
-            cout << "Modify Record of the Actor-Actress Database "<< endl;
-            // call ActorBST::modifyRecord
-        }
-        else if (userInputModify==2)
-        {
-            cout << "Modify Record of the Movie Database"<< endl;
-            // call MovieBST::modifyRecord
-        }
-        else
-        {
-            cout << "Please make a valid selection"<< endl;
-            cin >> userInputModify;
-        }
-    } else if ( mainMenuInput == 4) {
-        cout << "Which Database would you like to delete a record from"<< endl;
-        cout << "1. Actor-Actress Database"<< endl;
-        cout << "2. Movies Database"<< endl;
-        cin >> userInputDelete;
-
-        if (userInputDelete==1)
-        {
-            cout << "Delete a record from the Actor-Actress Database"<< endl;
-            //call ActorBST::deleteRecord function
-        }
-        else if (userInputDelete==2)
-        {
-            cout << "Delete a record from the Movie Database"<< endl;
-            //call MovieBST::deleteRecord function
-        }
-        else
-        {
-            cout << "Please make a valid selection"<< endl;
-            cin >> userInputDelete;
-        }
-    } else if (mainMenuInput == 5) {
-        cout << "Which Database would you like to Export to .CSV file "<< endl;
-        cout << "1. Actor-Actress Database"<< endl;
-        cout << "2. Movies Database"<< endl;
-        cin >> userInputExport;
-
-        if (userInputExport==1)
-        {
-            cout <<"Export the Actor-Actress Database"<< endl;
-            // call file export
-        }
-        else if (userInputExport==2)
-        {
-            cout <<"Export the Movie Database"<< endl;
-            //call file export
-        }
-    } else if (mainMenuInput == 6) {
-        std::cout << "Exiting" <<std::endl;
-    }  else {
-        std::cout << "Not a valid selection, try again" <<std::endl;
+    } else {
+        std::cout << "Not a valid selection, try again" << std::endl;
     }
 }
