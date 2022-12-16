@@ -316,7 +316,7 @@ private:
         else if( t->element < x )
             return get(x, t->right);
         else
-            return x;    // Match
+            return t->element;    // Match
     }
 
     /**
