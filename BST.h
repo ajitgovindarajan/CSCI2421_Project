@@ -1,6 +1,5 @@
 /*************************************************
- * Author: Ajit Govindarajan
- * Version: 11/16/2022
+ * Version: 12/16/2022
  * BST.h provides all of the major methods of the implementation of the binary search tree
  * previously implemented function include insert, remove, contains, isempty and clear
  * newly implemented functions are to find the maximum and minimum elements of the tree,
