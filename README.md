@@ -72,5 +72,3 @@ unzip the file using the unix command or the right click of extract all
 run the make command
 
 Issue 'movie' on the command line 
-
-at the file input type "dictionary.txt"
