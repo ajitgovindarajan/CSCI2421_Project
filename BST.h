@@ -246,7 +246,6 @@ private:
         else
             return true;    // Match
     }
-    // need to return the Co
     /**
      * Internal method to make subtree empty.
      */
@@ -306,18 +305,18 @@ private:
         }
     }
 
-    Comparable get(const Comparable & x) const
+    Comparable get(const Comparable & x,BinaryNode* t) const
     {
         auto t = this ->root;
 
         if( t == nullptr )
-            return NULL;
+            return Comparable("");
         else if( x < t->element )
             return get(x, t->left);
         else if( t->element < x )
             return get(x, t->right);
         else
-            return t;    // Match
+            return x;    // Match
     }
 
     /**
