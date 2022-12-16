@@ -39,6 +39,7 @@ int main() {
     actDataBase.open(actor_actress.csv);
     pictureBase.open(pictures.csv);
 
+    cout<< "CSCI 2421 Final Project"<<endl;
 
 /*********************Main Menu*******************/
     cout << "Welcome to the Academy awards DataBase: " << endl;
@@ -73,7 +74,11 @@ int main() {
             cout << "Print the Sorted Data Base " << endl;
             printMovies_sorted(movie);
         } else if (mainMenuInput == 5) {
-            // partial search
+            cout << "Partial search of the movie database" << endl;
+            cout << "Enter the name of the movie";
+            getline(cin,movie_name);
+            auto movieToSearch = PartialSearchMovie(movie,movie_name);
+            cout << movieToSearch;
         } else if (mainMenuInput == 6) {
             cout << "Exporting the Movie Data base to a new csv file" << std::endl;
             printMovies_toFile(movie);
@@ -100,18 +105,20 @@ int main() {
             cin.ignore();
             cout << "Enter a Actor/ Actress name: ";
             getline(cin, actor_name);
-            modifyMovie(actor_actress, actor_name);
+            modifyActor(actor_actress, actor_name);
         } else if (mainMenuInput == 3) {
             cout << "Delete Record of the Actor/Actress Database " << endl;
-            cout << "Enter Actor/Actress name" << endl;
+            cout << "Enter Actor/Actress name: " << endl;
             getline(cin, actor_name);
-            deleteMovie(actor_actress, actor_name);
+            deleteActor(actor_actress, actor_name);
         } else if (mainMenuInput == 4) {
             cout << "Print the Sorted Data Base " << endl;
             printActress_sorted(actor_actress);
         } else if (mainMenuInput == 5) {
-            // partial search - ask for the name
-            // partial search
+            cout << "The complete search of the actor/actress database" <<endl;
+            cout<< "Enter the Actor/Actress name: " << endl;
+            getline(cin,actor_name);
+            completeSearchActor(actor_actress,actor_name);
         } else if (mainMenuInput == 6) {
             cout << "Exporting the Actor/Actress database to a new csv file" << std::endl;
             printActors_toFile(actor_actress);
