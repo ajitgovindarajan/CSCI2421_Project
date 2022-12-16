@@ -9,7 +9,7 @@
 #include <fstream>
 using namespace std;
 
-class NodeMovie
+class NodeMovie // movie class containing attributes such as year,nominations,rating,genre and synopsis.
 {
     NodeMovie();
     NodeMovie(string name, int year, int nominations, double rating, string genre1, string genre2,NodeMovie* left, NodeMovie* right){}
@@ -51,7 +51,7 @@ public:
     void Print(ostream& stream); // function that will export to file
 
 
-    //getters
+    //getters to get the parameters required
     string getName(){return name;};
     int getNomination(){return nominations;};
     double getRating(){return rating;};
@@ -62,7 +62,7 @@ public:
     string getSynopsis(){return synopsis;};
 
 
-    //setters
+    //setters to set parameters wherever required 
     void setName(string _name);
     void setNomination(int _nominations);
     void setRating(double _rating);
