@@ -111,10 +111,12 @@ void modifyMovie(BinarySearchTree<Movies> &movie,const std::string & name){
     cout << "modification" << endl;
     // cin won't work because there are spaces
     // use the find function in the BST
+    double rating;
     auto movie_to_search = movie.get(Movies(name));
     if (movie.contains(movies_to_search)){
-        cout << movie << endl;
-        movie.rating = 97;
+        cout << "This program will modify the rating of the movie, what is the new rating? "
+        cin >> rating
+        movie.rating = rating;
     } else {
         cerr << "Error!, Movie not found in database";
     }
