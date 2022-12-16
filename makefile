@@ -2,7 +2,7 @@
 #at the command prompt
 #make ./<TARGET>
 
-SOURCES = main.cpp actorActress.cpp Movies.cpp
+SOURCES = main.cpp
 
 ####### Specify the target name ######
 TARGET = movie
