@@ -306,9 +306,10 @@ private:
         }
     }
 
-    Comparable get(const Comparable & x,BinaryNode* t) const
+    Comparable get(const Comparable & x) const
     {
         auto t = this ->root;
+
         if( t == nullptr )
             return NULL;
         else if( x < t->element )
