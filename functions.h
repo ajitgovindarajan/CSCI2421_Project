@@ -21,7 +21,6 @@ void addMovie(BinarySearchTree<Movies> & movie){
     vector<std::string> newpIctureVec;
     cout << "Entering - Add The movie details"<< endl;
     string name,year,nominations,rating,duration,genre1,genre2,release,metacritic,synopsis;
-    newactorvec.push_back(name,date);
     cout << "Enter name: ";
     cin >> name;
     cout << "Enter Year: ";
@@ -56,10 +55,10 @@ void addMovie(BinarySearchTree<Movies> & movie){
     newpIctureVec.push_back(synopsis);
 
     Movies movie_to_add(newpIctureVec);
-    movie.insert(movie_to_add);
+    movie.Insert(movie_to_add);
 }
 
-void addActor(BinarySearchTree<actor_actress> &actor)){
+void addActor(BinarySearchTree<ActressActor> &actor){
     // same method for the actor/actress
     // initialize everything in the right variable type
     cout << "Entering - Add Actor/actress"<< endl;
@@ -84,11 +83,11 @@ void addActor(BinarySearchTree<actor_actress> &actor)){
     newactorvec.push_back(name);
     newactorvec.push_back(film);
 
-    ActressActor actor_to_add(newpIctureVec);
-    actor.insert(actor_to_add);
+    ActressActor actor_to_add(newactorvec);
+    actor.Insert(actor_to_add);
 }
 
-void modifyActor(BinarySearchTree<actor_actress> &act,const std::string & name) {
+void modifyActor(BinarySearchTree<ActressActor> &act,const std::string & name) {
     cout << "modification" << endl;
     // cin won't work because there are spaces
     // use the find function in the BST
@@ -228,7 +227,7 @@ void deleteMovie(BinarySearchTree<Movies> &movie,const std::string & name){
         cerr << "Error!, Movie not found in database";
     }
 }
-void deleteActor(BinarySearchTree<actor_actress> &act,const std::string & name)){
+void deleteActor(BinarySearchTree<ActressActor> &act,const std::string & name){
     auto actor_del = ActressActor(name);
     if (act.contains(actor_del)){
         act.remove(act_del);
@@ -237,7 +236,7 @@ void deleteActor(BinarySearchTree<actor_actress> &act,const std::string & name))
     }
 }
 
-ActressActor completeSearchActor(BinarySearchTree<actor_actress> &act,const std::string & name)){
+ActressActor completeSearchActor(BinarySearchTree<actor_actress> &act,const std::string & name){
     auto actress = ActressActor(name);
     auto release = ActressActor(year);
     auto recognition = ActressActor(award);
@@ -265,7 +264,7 @@ ActressActor completeSearchActor(BinarySearchTree<actor_actress> &act,const std:
 
 }
 // partial search of the movies database
-Movies PartialSearchMovie(BinarySearchTree<Movies> &act,const std::string & movie_name)){
+Movies PartialSearchMovie(BinarySearchTree<Movies> &act,const std::string & movie_name){
 // comparison to fields and look through each
 // mainly name and synopsis
  auto movie = Movies(movie_name);
