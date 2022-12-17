@@ -88,17 +88,52 @@ void addActor(BinarySearchTree<actor_actress> &actor)){
     actor.insert(actor_to_add);
 }
 
-void modifyActor(BinarySearchTree<actor_actress> &act,const std::string & name){
+void modifyActor(BinarySearchTree<actor_actress> &act,const std::string & name) {
     cout << "modification" << endl;
     // cin won't work because there are spaces
     // use the find function in the BST
     auto actress = act.get(ActressActor(name));
-    if (act.contains(actress)){
-        win = act.winner;
-        if (win == 1) {
-            act.win = "0";
+    int choice;
+    if (act.contains(actress)) {
+        cout << "This program will modify the fields of the actor/actress? "
+        cout << "Which field would you like to modify?" << endl;
+        cout << "1)name\n"
+                "2)year\n"
+                "3)winner\n"
+                "4)award\n"
+                "5)film" << endl;
+        cin >> choice;
+        if (choice == 1) {
+            std::string namer;
+            cout << "you choose to modify the name, what is the new name you want ?";
+            getline(cin, namer);
+            act.name = namer;
+        } else if (choice == 2) {
+            int newYear;
+            cout << "you choose to modify the year, what is the new year you want ?";
+            getline(cin, newYear);
+            act.year = to_string(newYear);
+        } else if (choice == 3) {
+            int win;
+            cout << "you choose to modify the winner, what is the new winner field (1 for yes and 0 for yes) ?";
+            getline(cin, win);
+            if (win != 0) || (win != 1)
+            {
+                cout << "Not a valid modification to the winner field" << endl;
+            } else {
+                act.winner = to_string(win);
+            }
+        } else if (choice == 4) {
+            cout << "you choose to modify the award, what is the new awards field you want ?";
+            string prize;
+            act.award = prize;
+        } else if (choice == 5) {
+            string flim;
+            cout << "you choose to change the movie, what is the new movie you want ?";
+            getline(cin, flim);
+            act.film = flim;
         } else {
-            act.win = "1";
+            cout << "Not a value record to modify" <<endl;
         }
     } else {
         cerr << "Error!, Actor/Actress not found in database";
@@ -111,12 +146,74 @@ void modifyMovie(BinarySearchTree<Movies> &movie,const std::string & name){
     cout << "modification" << endl;
     // cin won't work because there are spaces
     // use the find function in the BST
-    double rating;
+    int choice;
     auto movie_to_search = movie.get(Movies(name));
     if (movie.contains(movies_to_search)){
-        cout << "This program will modify the rating of the movie, what is the new rating? "
-        cin >> rating
-        movie.rating = rating;
+        cout << "This program will modify the fields of the movie, what is the new rating? "
+        cout << "Which field would you like to modify?" << endl;
+        cout << "1)name\n"
+                "2)year\n"
+                "3)nominations\n"
+                "4)rating\n"
+                "5)duration\n"
+                "6)genre1\n"
+                "7)genre2\n"
+                "8)release\n"
+                "9)metacritic\n"
+                "10)synopsis"<<endl
+        cin >> choice;
+        if (choice == 1){
+            std::string namer;
+            cout << "you choose to modify the name, what is the new name you want ?";
+            getline(cin,namer);
+            movie.name = namer;
+        } else if(choice == 2) {
+            int newYear;
+            cout << "you choose to modify the year, what is the new year you want ?";
+            getline(cin,newYear);
+            movie.year = to_string(newYear);
+        } else if (choice ==3) {
+            int nom;
+            cout << "you choose to modify the nominations, what is the new nominations you want ?";
+            getline(cin,nom);
+            movie.nominations = to_string(nom);
+        } else if(choice == 4) {
+            cout << "you choose to modify the rating, what is the new rating you want ?";
+            double rating;
+            movie.rating = to_string(rating);
+        } else if (choice ==5) {
+            double length;
+            cout << "you choose to modify the duration of the movie, what is the new duration you want ?";
+            getline(cin,length);
+            movie.duration = to_string(length);
+        } else if(choice == 6) {
+            std::string Newgenre;
+            cout << "you choose to modify the genre of the movie, what is the new main genre you want ?";
+            getline(cin,NewGenre);
+            movie.genre1 = Newgenre;
+        } else if (choice == 7) {
+            double NewGenre2;
+            cout << "you choose to modify the sub-genre of the movie, what is the new sub genre you want ?";
+            getline(cin,NewGenre2);
+            movie.genre2 = NewGenre2;
+        } else if (choice == 8) {
+            string newRelease;
+            cout << "you choose to modify the release of the movie, what is the new release month you want ?";
+            getline(cin,newRelease)
+            movie.release = newRelease;
+        } else if (choice == 9) {
+            double meta;
+            cout << "you choose to modify the metacritic of the movie, what is the new metacritic you want ?";
+            getline(cin,meta);
+            movie.metacritic = to_string(meta);
+        } else if (choice == 10) {
+            string synp;
+            cout << "you choose to modify the synopsis of the movie, what is the new synopsis you want ?";
+            getline(cin,synp);
+            movie.synopsis = synp;
+        } else {
+            cout << "Not a valid record to modify" <<endl;
+        }
     } else {
         cerr << "Error!, Movie not found in database";
     }
@@ -145,7 +242,7 @@ ActressActor completeSearchActor(BinarySearchTree<actor_actress> &act,const std:
     if (act.contains(actress)){
         return act.get(actress);
     } else {
-        cerr << "Error!, Movie not found in database";
+        cerr << "Error!, Actress/Actor not found in database";
         return NULL;
     }
 
