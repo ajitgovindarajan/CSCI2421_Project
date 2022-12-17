@@ -239,9 +239,26 @@ void deleteActor(BinarySearchTree<actor_actress> &act,const std::string & name))
 
 ActressActor completeSearchActor(BinarySearchTree<actor_actress> &act,const std::string & name)){
     auto actress = ActressActor(name);
+    auto release = ActressActor(year);
+    auto recognition = ActressActor(award);
+    auto champion = ActressActor(winner);
+    auto movie = ActressActor(film);
     if (act.contains(actress)){
         return act.get(actress);
-    } else {
+    }
+    else if (act.contains(release)){
+        return act.get(release);
+    }
+    else if (act.contains(recognition)){
+        return act.get(recognition);
+    }
+    else if (act.contains(champion)){
+        return act.get(champion);
+    }
+    else if (act.contains(movie)){
+        return act.get(movie);
+    }
+    else {
         cerr << "Error!, Actress/Actor not found in database";
         return NULL;
     }
