@@ -192,7 +192,7 @@ public:
     }
 
     Comparable get(const Comparable& x) const {
-        return get(x,root);
+        return get(x,_root);
     }
 
 private:
@@ -305,9 +305,10 @@ private:
         }
     }
 
-    Comparable get(const Comparable & x,BinaryNode* t) const
+    Comparable get(const Comparable & x,BinaryNode *t) const
     {
-        auto t = this ->root;
+        //auto t = this->root;
+        //t = this->root;
 
         if( t == nullptr )
             return Comparable("");
