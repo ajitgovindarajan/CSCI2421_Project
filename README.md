@@ -62,7 +62,7 @@ compiled, run, and tested on gcc csegrid server.
  * Compilation
 
 The project can be compiled by issuing the 'make' command on a linux terminal. Upon successful compilation,
-an executable named 'hw3.exe' will be created on the current directory
+an executable named 'FinalProject.exe' will be created on the current directory
 
 * Running
 unzip the file using the unix command or the right click of extract all
