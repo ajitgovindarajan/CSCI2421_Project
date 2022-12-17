@@ -1,77 +1,68 @@
-//
-// Created by agovi on 11/21/2022.
-//
+/*************************************************
+ * Version: 12/16/2022
+ * Movies.h instantiates the object of the Movies
+ * and associates the data sets with the values of name, the year the movie was made, the nominations for awards
+ * , the rating of the movie, the length of movie, the genre of the movie, the release, ans the synopsis of the
+ * movie
+ * Once the object is instantiated, the fields for each category get filled in later for use of
+ * the other operations especially for the searching fields and the exportation of the records
+ * for the final database. This provides the frame work for when a record is added to ask for
+ * all the fields in the container that is an movie
+ * **************************************************/
 
 #ifndef FINAL_PROJECT_MOVIES_H
 #define FINAL_PROJECT_MOVIES_H
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <utility>
 using namespace std;
 
-class NodeMovie // movie class containing attributes such as year,nominations,rating,genre and synopsis.
-{
-    NodeMovie();
-    NodeMovie(string name, int year, int nominations, double rating, string genre1, string genre2,NodeMovie* left, NodeMovie* right){}
-    void setKey(string key){}
-
-public:
-    string key;
-    NodeMovie* leftNode;
-    NodeMovie* rightNode;
-};
-
-class MovieBST
-{
-private:
-    NodeMovie* root;
-    void addRecord(NodeMovie *node_to_add,NodeMovie *subtree_root );
-    void Print(ostream& stream,NodeMovie* subtree_root);
-    void deleteRecord(NodeMovie *node_to_delete );
-
+struct Movies{
     string name;
-    int year;
-    int nominations;
-    double rating;
+    int year{};
+    int nominations= 0;
+    int rating = 0;
+    int duration;
     string genre1;
     string genre2;
     string release;
-    int metacritic;
     string synopsis;
+    int metacritic = 0;
 
+    explicit Movies(std::vector<std::string>data){
+        try{
+            name = data[0];
+            year = stoi(data[1]);
+            nominations = stoi(data[2])? data[2] != "-":0;
+            rating = stoi(data[3]);
+            duration = stof(data[4]);
+            genre1 = data[5];
+            genre2 = data[6];
+            release = data[7];
+            metacritic = stoi(data[8]);
+            synopsis = data[9];
+        }
+        catch (...){
+            cerr << "Something is not right\n";
+        }
+    }
+    explicit Movies(const string &movie_name) {
+        name = movie_name;
+    }
 
+    bool operator < (const Movies &mviename) const {
+        return (this->name < mviename.name);
+    }
 
-public:
-    MovieBST();
-    void setKey(string key){};
-    string key();
-    void AddRecord(NodeMovie* leaf); // function that will add a record
-    void ModifyRecord(string, int ); // function that will modify a record
-    void DeleteRecord(NodeMovie* leaf); // function that will delete a record
-    void Print(ostream& stream); // function that will export to file
+    friend std::ostream& operator << (std::ostream& out, Movies &movies){
+        out << "Name: " << movies.name <<endl;
+        out << "Year: " << movies.year <<endl;
+        out << "Synopsis: " << movies.synopsis <<endl;
+        out << "Nominations: " << movies.nominations <<endl;
 
-
-    //getters to get the parameters required
-    string getName(){return name;};
-    int getNomination(){return nominations;};
-    double getRating(){return rating;};
-    string getGenre1(){return genre1;};
-    string getGenre2(){return genre2;};
-    string getRelease(){return release;};
-    int getMetacritic(){return metacritic;};
-    string getSynopsis(){return synopsis;};
-
-
-    //setters to set parameters wherever required 
-    void setName(string _name);
-    void setNomination(int _nominations);
-    void setRating(double _rating);
-    void setGenre1(string _genre1);
-    void setGenre2(string _genre2);
-    void setRelease(string _release);
-    void setMetacritic(int _metacritic);
-    void setSynopsis(string _synopsis);
-
-
+        return out;
+    }
 };
+
 #endif //FINAL_PROJECT_MOVIES_H
